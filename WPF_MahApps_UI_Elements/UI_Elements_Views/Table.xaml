@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="WPF_MahApps_UI_Elements.UI_Elements_Views.Table"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_MahApps_UI_Elements.UI_Elements_Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="AlignmentStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="ColumnHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource AlignmentStyle}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="Orange"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        <Style x:Key="RowStyle" TargetType="TextBlock" BasedOn="{StaticResource AlignmentStyle}">
+            <Setter Property="Height" Value="50"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Border  BorderBrush="Orange" BorderThickness="2"  Margin="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+     
+                    <ItemsControl ItemsSource="{Binding Products}"   >
+          
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate >
+                            <Border Grid.Row="1" BorderBrush="Orange" BorderThickness="0 2 0 2" >
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Margin="0" Padding="10" FontSize="25" FontWeight="Bold" Foreground="Orange"  Text="{Binding name}" 
+                                           Style="{StaticResource AlignmentStyle}" HorizontalAlignment="Stretch"/>
+
+                                    <Border Grid.Row="1" BorderBrush="Orange" BorderThickness="0 2 0 2" >
+                                        <Grid  Margin="10 10 10 0"  HorizontalAlignment="Stretch" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Style="{StaticResource ColumnHeaderStyle}"  Grid.Column="0" Margin="20 0 10 0" Text="Id" />
+                                            <TextBlock Style="{StaticResource ColumnHeaderStyle}" Grid.Column="1" Margin="20 0 10 0" Text="Name" />
+                                            <TextBlock Style="{StaticResource ColumnHeaderStyle}" Grid.Column="2" Margin="15 0 10 0"  Text="Amount" />
+                                            <TextBlock Style="{StaticResource ColumnHeaderStyle}" Grid.Column="3" Margin="2 0 10 0"  Text="Bild"/>
+                                        </Grid>
+                                    </Border>
+
+                                    <ItemsControl Grid.Row="2" ItemsSource="{Binding specs}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+
+
+                                                    <TextBlock  Style="{StaticResource AlignmentStyle}" Grid.Row="0" Margin="10" Padding="10"   Foreground="White" Text="{Binding name}"  HorizontalAlignment="Stretch">
+                                                        <TextBlock.Background>
+                                                            <LinearGradientBrush  StartPoint="0,1" EndPoint="0,0">
+                                                                <GradientStop Color="DarkViolet" Offset="0.7" />
+                                                                <GradientStop Color="Violet" Offset="1" />
+                                                            </LinearGradientBrush>
+                                                        </TextBlock.Background>
+                                                    </TextBlock>
+
+                                                    <ListBox Grid.Row="1"   ItemsSource="{Binding ingredients}"  Margin="15" SelectedItem="{Binding SelectedArticle}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                                        <ListBox.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal"  >
+                                                                    <Grid HorizontalAlignment="Stretch"  Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" >
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="*" />
+                                                                            <ColumnDefinition Width="*" />
+                                                                            <ColumnDefinition Width="*" />
+                                                                            <ColumnDefinition Width="*" />
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <TextBlock Style="{StaticResource RowStyle}" Grid.Column="0" Margin="10 10 10 10" Text="{Binding Id}"  />
+                                                                        <TextBlock Style="{StaticResource RowStyle}" Grid.Column="1" Margin="20 10 20 10" Text="{Binding name}"/>
+                                                                        <TextBlock Style="{StaticResource RowStyle}" Grid.Column="2" Margin="20 10 20 10"  Text="{Binding amount}"/>
+                                                                        <Image Grid.Column="3" Source="{Binding image}"  Margin="20 10 20 10" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                                    </Grid>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                    </ListBox>
+
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+         
+                </ItemsControl>
+                    
+            </ScrollViewer>
+
+        </Grid>
+    </Border>
+</UserControl>

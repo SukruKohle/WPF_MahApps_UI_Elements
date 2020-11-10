@@ -1,0 +1,47 @@
+﻿<mah:MetroWindow x:Class="WPF_MahApps_UI_Elements.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:views="clr-namespace:WPF_MahApps_UI_Elements.UI_Elements_Views"        
+        xmlns:viewModels="clr-namespace:WPF_MahApps_UI_Elements.UI_Elements_ViewModels"
+        mc:Ignorable="d"
+        Title="UI_Elements" Height="900" Width="1000"   
+        WindowStartupLocation="CenterScreen"
+        FontSize="20">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="DarkViolet"  Grid.Column="0" Grid.Row="0" BorderThickness="0 0 2 0">
+                    <views:NavigationMenu    Margin="0 50 0 0"
+                         DataContext="{Binding NavigationMenuViewModel}"/>
+        </Border>
+
+        <mah:MetroAnimatedTabControl  Grid.Column="1" Grid.Row="0"       
+            mah:TabControlHelper.Transition="Up"
+            SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
+            <mah:MetroTabItem Header="UI Elements">          
+                    <views:Button    Margin="0 0 0 0"/>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="Tables">
+                <views:Table    Margin="0 0 0 0"
+                         DataContext="{Binding TableViewModel}"/>
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="Graphs">
+                <views:Graph    Margin="0 0 0 0"
+                         DataContext="{Binding GraphViewModel}"/>
+            </mah:MetroTabItem>
+        </mah:MetroAnimatedTabControl>
+
+    </Grid>
+   
+</mah:MetroWindow>
